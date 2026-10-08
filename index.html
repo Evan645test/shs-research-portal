@@ -179,13 +179,13 @@
     <header class="portal-header">
       <p class="kicker">高中小論文・研究與投稿入口</p>
       <h1>從參考作品找方向，<br>到交稿前逐項確認。</h1>
-      <p class="lead">從小論文與科學探究作品觀察研究問題、方法和成果，再切換到繳交檢查分頁核對自己的參賽稿。</p>
+      <p class="lead">先用小論文自我檢查核對參賽稿，再到得獎作品分頁參考研究問題、方法與成果。</p>
       <nav class="portal-jumps" role="tablist" aria-label="小論文入口分頁">
-        <button id="tab-library" type="button" role="tab" aria-controls="library" aria-selected="true" tabindex="0">查看得獎作品</button>
-        <button id="tab-checklist" type="button" role="tab" aria-controls="checklist" aria-selected="false" tabindex="-1">前往繳交檢查</button>
+        <button id="tab-checklist" type="button" role="tab" aria-controls="checklist" aria-selected="true" tabindex="0">小論文自我檢查</button>
+        <button id="tab-library" type="button" role="tab" aria-controls="library" aria-selected="false" tabindex="-1">查看得獎作品</button>
       </nav>
     </header>
-    <section class="library tab-panel" id="library" role="tabpanel" aria-labelledby="tab-library" tabindex="0">
+    <section class="library tab-panel" id="library" role="tabpanel" aria-labelledby="tab-library" tabindex="0" hidden>
       <div class="library-heading">
         <h2 id="library-heading">得獎作品索引</h2>
         <p>小論文為民國 111～114 年得獎作品；這樣教我就懂為 2024–2026 年作品說明。共 <span id="catalog-total">862</span> 篇</p>
@@ -471,11 +471,11 @@
   <script>
     (() => {
       'use strict';
-      const tabs = [document.getElementById('tab-library'), document.getElementById('tab-checklist')];
-      const panels = [document.getElementById('library'), document.getElementById('checklist')];
-      const checklistHash = /^#(?:checklist|section-[1-4]|heading-[1-4]|check-\d+|main-content)$/;
+      const tabs = [document.getElementById('tab-checklist'), document.getElementById('tab-library')];
+      const panels = [document.getElementById('checklist'), document.getElementById('library')];
       function tabFromLocation() {
-        return checklistHash.test(window.location.hash) ? 1 : 0;
+        const target = document.getElementById(window.location.hash.slice(1));
+        return target && (target.id === 'library' || target.closest('#library')) ? 1 : 0;
       }
       function showTab(index) {
         tabs.forEach((tab, position) => {
@@ -488,7 +488,7 @@
       tabs.forEach((tab, index) => {
         tab.addEventListener('click', () => {
           showTab(index);
-          const hash = index === 0 ? '#library' : '#checklist';
+          const hash = index === 0 ? '#checklist' : '#library';
           if (window.location.hash !== hash) {
             try {
               window.history.pushState(null, '', hash);
@@ -511,7 +511,7 @@
       });
       function restoreTabFromLocation() {
         showTab(tabFromLocation());
-        if (window.location.hash && window.location.hash !== '#library') {
+        if (window.location.hash && window.location.hash !== '#checklist') {
           window.requestAnimationFrame(() => {
             const target = document.getElementById(window.location.hash.slice(1));
             if (target) target.scrollIntoView();
