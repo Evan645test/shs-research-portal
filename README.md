@@ -1,6 +1,6 @@
 # 高中小論文研究與投稿入口
 
-此資料夾是可直接部署的靜態網站。`index.html` 提供「得獎作品」與「繳交檢查」兩個分頁；`chemistry/index.html`、`agriculture/index.html` 和 `narrative/index.html` 是三份完整索引。作品連結指向中學生網站或科學探究競賽主辦單位的原文頁面，本站不託管作品 PDF。
+此資料夾是可直接部署的靜態網站。`index.html` 以「小論文自我檢查」為預設分頁，第二個分頁為「查看得獎作品」；`chemistry/index.html`、`agriculture/index.html` 和 `narrative/index.html` 是三份完整索引。作品連結指向中學生網站或科學探究競賽主辦單位的原文頁面，本站不託管作品 PDF。
 
 ## 部署到 GitHub Pages
 
